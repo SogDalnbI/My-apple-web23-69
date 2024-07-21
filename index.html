@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 App</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, red, green, white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .apple {
+            width: 100px;
+            height: 100px;
+            background: url('Apple.png') no-repeat center/cover;
+            border-radius: 50%;
+        }
+        .profile {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: url('profil.png') no-repeat center/cover;
+            border-radius: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="apple" onclick="incrementCounter()"></div>
+    <div class="profile" onclick="showProfile()"></div>
+    <script>
+        let count = 0;
+
+        function incrementCounter() {
+            count++;
+            const text = document.createElement('div');
+            text.innerText = '+1';
+            text.style.position = 'absolute';
+            text.style.top = '50%';
+            text.style.left = '50%';
+            text.style.transform = 'translate(-50%, -50%)';
+            text.style.fontSize = '24px';
+            text.style.color = '#fff';
+            document.body.appendChild(text);
+
+            setTimeout(() => {
+                text.style.top = '40%';
+                text.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(text);
+                }, 1000);
+            }, 10);
+        }
+
+        function showProfile() {
+            alert(`Количество яблок: ${count}`);
+        }
+    </script>
+</body>
+</html>
