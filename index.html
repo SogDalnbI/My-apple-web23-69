@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web3 App</title>
+    <title>ЯБЛОКО 💸</title>
     <style>
         body {
             background: linear-gradient(to bottom, red, green, white);
@@ -20,6 +20,7 @@
             height: 100px;
             background: url('Apple.png') no-repeat center/cover;
             border-radius: 50%;
+            cursor: pointer;
         }
         .profile {
             position: absolute;
@@ -29,14 +30,49 @@
             height: 50px;
             background: url('profil.png') no-repeat center/cover;
             border-radius: 25%;
+            cursor: pointer;
+        }
+        .profile-info {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            width: 200px;
+            padding: 20px;
+            background: black;
+            color: white;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cases {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 50px;
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid black;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <div class="apple" onclick="incrementCounter()"></div>
     <div class="profile" onclick="showProfile()"></div>
+    <div class="cases">Кейсы</div>
+    <div class="profile-info" id="profile-info">
+        ПРОФИЛЬ<br>
+        Время на сайте: <span id="time-spent">0</span> секунд<br>
+        Яблоки: <span id="apple-count">0</span>
+    </div>
     <script>
         let count = 0;
+        let startTime = Date.now();
 
         function incrementCounter() {
             count++;
@@ -48,6 +84,7 @@
             text.style.transform = 'translate(-50%, -50%)';
             text.style.fontSize = '24px';
             text.style.color = '#fff';
+            text.style.transition = 'all 3s ease-in-out';
             document.body.appendChild(text);
 
             setTimeout(() => {
@@ -55,13 +92,43 @@
                 text.style.opacity = '0';
                 setTimeout(() => {
                     document.body.removeChild(text);
-                }, 1000);
+                }, 3000);
             }, 10);
         }
 
         function showProfile() {
-            alert(`Количество яблок: ${count}`);
+            const profileInfo = document.getElementById('profile-info');
+            const timeSpent = document.getElementById('time-spent');
+            const appleCount = document.getElementById('apple-count');
+            timeSpent.innerText = Math.floor((Date.now() - startTime) / 1000);
+            appleCount.innerText = count;
+            profileInfo.style.display = 'flex';
+            setTimeout(() => {
+                profileInfo.style.display = 'none';
+            }, 5000);
         }
+
+        // Firebase initialization
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXPZ7AvAoFs_w9aBHiok4N-yK4POjMWEM",
+            authDomain: "hj-mobil.firebaseapp.com",
+            projectId: "hj-mobil",
+            storageBucket: "hj-mobil.appspot.com",
+            messagingSenderId: "59811899337",
+            appId: "1:59811899337:web:b686ecf5f4d7d893a2aa18",
+            measurementId: "G-1C6PR6JJFQ"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
     </script>
 </body>
 </html>
