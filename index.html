@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЯБЛОКО 💸</title>
+    <title>Web3 App</title>
     <style>
         body {
             background: linear-gradient(to bottom, red, green, white);
@@ -107,14 +107,12 @@
                 profileInfo.style.display = 'none';
             }, 5000);
         }
-
-        // Firebase initialization
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
+    </script>
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+    <!-- Firebase Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js"></script>
+    <script>
         // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBXPZ7AvAoFs_w9aBHiok4N-yK4POjMWEM",
@@ -127,8 +125,8 @@
         };
 
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        const app = firebase.initializeApp(firebaseConfig);
+        const analytics = firebase.analytics();
     </script>
 </body>
 </html>
