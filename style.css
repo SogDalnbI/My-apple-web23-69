@@ -1,0 +1,145 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #000000, #434343);
+    color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 10px 0;
+    color: white;
+    text-shadow: 1px 1px 2px gray;
+}
+
+p {
+    margin: 10px 0;
+    text-shadow: 1px 1px 2px gray;
+}
+
+/* Стили для контейнера */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Стили для навигации */
+nav {
+    background: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 5px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 20px;
+    background: linear-gradient(to right, #32CD32, #228B22);
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background: linear-gradient(to right, #228B22, #32CD32);
+}
+
+/* Стили для заголовка */
+header {
+    background: #333;
+    color: white;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid;
+}
+
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    text-shadow: 1px 1px 2px gray;
+}
+
+/* Стили для основного контента */
+main {
+    padding: 20px;
+}
+
+/* Стили для боковой панели */
+aside {
+    float: right;
+    width: 30%;
+    margin-top: 10px;
+    padding: 20px;
+    background: #444;
+    color: white;
+    text-shadow: 1px 1px 2px gray;
+}
+
+/* Стили для секций */
+section {
+    float: left;
+    width: 65%;
+    margin-top: 10px;
+    padding: 20px;
+    background: #555;
+    color: white;
+    text-shadow: 1px 1px 2px gray;
+}
+
+/* Стили для футера */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    clear: both;
+    text-shadow: 1px 1px 2px gray;
+}
+
+/* Стили для кнопок */
+button {
+    display: inline-block;
+    font-size: 16px;
+    color: white;
+    background: linear-gradient(to right, #32CD32, #228B22);
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+    text-shadow: 1px 1px 2px gray;
+}
+
+button:hover {
+    background: linear-gradient(to right, #228B22, #32CD32);
+}
+
+/* Медиа-запросы для адаптивного дизайна */
+@media(max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 0;
+    }
+
+    aside, section {
+        float: none;
+        width: 100%;
+    }
+}
