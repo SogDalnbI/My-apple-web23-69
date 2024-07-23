@@ -6,7 +6,7 @@
     <title>Web3 App</title>
     <style>
         body {
-            background: linear-gradient(to bottom, red, green, white);
+            background: linear-gradient(to bottom, black, gray);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -16,8 +16,8 @@
             font-family: Arial, sans-serif;
         }
         .apple {
-            width: 100px;
-            height: 100px;
+            width: 250px;
+            height: 250px;
             background: url('Apple.png') no-repeat center/cover;
             border-radius: 50%;
             cursor: pointer;
@@ -50,8 +50,8 @@
             right: 20px;
             width: 100px;
             height: 50px;
-            background: white;
-            color: black;
+            background: #333;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -59,36 +59,82 @@
             border: 1px solid black;
             border-radius: 10px;
         }
+        .cases-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: black;
+            border-radius: 15px;
+            transform: translate(-50%, -50%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cases-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cases-content img {
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
-    <div class="apple" onclick="incrementCounter()"></div>
+    <div class="apple" onclick="incrementCounter(event)"></div>
     <div class="profile" onclick="showProfile()"></div>
-    <div class="cases">Кейсы</div>
+    <div class="cases" onclick="showCases()">Кейсы</div>
     <div class="profile-info" id="profile-info">
         ПРОФИЛЬ<br>
         Время на сайте: <span id="time-spent">0</span> секунд<br>
         Яблоки: <span id="apple-count">0</span>
     </div>
+    <div class="cases-popup" id="cases-popup">
+        <button class="close-btn" onclick="closeCases()">Закрыть</button>
+        <div class="cases-content">
+            <img src="Apple.png" alt="Apple">
+        </div>
+    </div>
     <script>
         let count = 0;
         let startTime = Date.now();
+        let lastClickTime = 0;
 
-        function incrementCounter() {
+        function incrementCounter(event) {
+            const currentTime = Date.now();
+            if (currentTime - lastClickTime < 1000) {
+                return;
+            }
+            lastClickTime = currentTime;
+
             count++;
             const text = document.createElement('div');
             text.innerText = '+1';
             text.style.position = 'absolute';
-            text.style.top = '50%';
-            text.style.left = '50%';
-            text.style.transform = 'translate(-50%, -50%)';
+            text.style.left = `${event.clientX}px`;
+            text.style.top = `${event.clientY}px`;
             text.style.fontSize = '24px';
             text.style.color = '#fff';
             text.style.transition = 'all 3s ease-in-out';
             document.body.appendChild(text);
 
             setTimeout(() => {
-                text.style.top = '40%';
+                text.style.top = `${event.clientY - 20}px`;
                 text.style.opacity = '0';
                 setTimeout(() => {
                     document.body.removeChild(text);
@@ -106,6 +152,14 @@
             setTimeout(() => {
                 profileInfo.style.display = 'none';
             }, 5000);
+        }
+
+        function showCases() {
+            document.getElementById('cases-popup').style.display = 'flex';
+        }
+
+        function closeCases() {
+            document.getElementById('cases-popup').style.display = 'none';
         }
     </script>
     <!-- Firebase App (the core Firebase SDK) -->
