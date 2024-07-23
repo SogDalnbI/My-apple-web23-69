@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web3 App</title>
+    <title>яблоко</title>
     <style>
         body {
             background: linear-gradient(to bottom, black, gray);
@@ -16,16 +16,16 @@
             font-family: Arial, sans-serif;
         }
         .apple {
-            width: 130px;
-            height: 130px;
+            width: 250px;
+            height: 250px;
             background: url('Apple.png') no-repeat center/cover;
-            border-radius: 50%;
+            border-radius: 65%;
             cursor: pointer;
             outline: none;
         }
         .profile {
             position: absolute;
-            bottom: 20px;
+            bottom: 80px;
             left: 20px;
             width: 50px;
             height: 50px;
@@ -84,8 +84,9 @@
             border-radius: 15px;
             transform: translate(-50%, -50%);
             display: none;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 10px;
         }
         .cases-popup .close-btn {
             position: absolute;
@@ -101,13 +102,15 @@
             width: 100%;
             height: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
+            justify-content: flex-start;
         }
         .cases-content img {
             width: 100px;
             height: 100px;
+            border: 2px solid #555;
             border-radius: 15px;
+            margin-right: 10px;
         }
         .progress-bar {
             position: absolute;
@@ -151,7 +154,8 @@
     <div class="cases-popup" id="cases-popup">
         <button class="close-btn" onclick="closeCases()">Закрыть</button>
         <div class="cases-content">
-            <img src="ApleCase.png" alt="ApleCase">
+            <img src="AppleCase.png" alt="AppleCase">
+            <img src="StandoffCase.png" alt="StandoffCase">
         </div>
     </div>
     <script>
@@ -226,26 +230,6 @@
             }
             progress.style.width = `${width}%`;
         }
-    </script>
-    <!-- Firebase App (the core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-    <!-- Firebase Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js"></script>
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBXPZ7AvAoFs_w9aBHiok4N-yK4POjMWEM",
-            authDomain: "hj-mobil.firebaseapp.com",
-            projectId: "hj-mobil",
-            storageBucket: "hj-mobil.appspot.com",
-            messagingSenderId: "59811899337",
-            appId: "1:59811899337:web:b686ecf5f4d7d893a2aa18",
-            measurementId: "G-1C6PR6JJFQ"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
     </script>
 </body>
 </html>
