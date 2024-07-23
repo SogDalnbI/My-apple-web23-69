@@ -16,11 +16,12 @@
             font-family: Arial, sans-serif;
         }
         .apple {
-            width: 250px;
-            height: 250px;
+            width: 130px;
+            height: 130px;
             background: url('Apple.png') no-repeat center/cover;
             border-radius: 50%;
             cursor: pointer;
+            outline: none;
         }
         .profile {
             position: absolute;
@@ -31,18 +32,30 @@
             background: url('profil.png') no-repeat center/cover;
             border-radius: 25%;
             cursor: pointer;
+            outline: none;
         }
         .profile-info {
             position: absolute;
-            bottom: 80px;
+            top: 20px;
             left: 20px;
-            width: 200px;
+            width: 300px;
             padding: 20px;
             background: black;
             color: white;
             display: none;
             flex-direction: column;
             align-items: center;
+            border-radius: 10px;
+        }
+        .profile-info .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .cases {
             position: absolute;
@@ -58,6 +71,7 @@
             cursor: pointer;
             border: 1px solid black;
             border-radius: 10px;
+            outline: none;
         }
         .cases-popup {
             position: absolute;
@@ -72,7 +86,7 @@
             align-items: center;
             justify-content: center;
         }
-        .close-btn {
+        .cases-popup .close-btn {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -92,14 +106,42 @@
         .cases-content img {
             width: 100px;
             height: 100px;
+            border-radius: 15px;
+        }
+        .progress-bar {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        .progress-bar .progress {
+            height: 100%;
+            background: green;
+            width: 0;
+            transition: width 0.3s;
         }
     </style>
 </head>
 <body>
-    <div class="apple" onclick="incrementCounter(event)"></div>
-    <div class="profile" onclick="showProfile()"></div>
-    <div class="cases" onclick="showCases()">Кейсы</div>
+    <div class="progress-bar">
+        <span id="progress-text">Палки</span>
+        <div class="progress" id="progress"></div>
+    </div>
+    <div class="apple" onclick="incrementCounter(event)" tabindex="0"></div>
+    <div class="profile" onclick="showProfile()" tabindex="0"></div>
+    <div class="cases" onclick="showCases()" tabindex="0">Кейсы</div>
     <div class="profile-info" id="profile-info">
+        <button class="close-btn" onclick="closeProfile()">Закрыть</button>
         ПРОФИЛЬ<br>
         Время на сайте: <span id="time-spent">0</span> секунд<br>
         Яблоки: <span id="apple-count">0</span>
@@ -107,7 +149,7 @@
     <div class="cases-popup" id="cases-popup">
         <button class="close-btn" onclick="closeCases()">Закрыть</button>
         <div class="cases-content">
-            <img src="Apple.png" alt="Apple">
+            <img src="ApleCase.png" alt="ApleCase">
         </div>
     </div>
     <script>
@@ -117,12 +159,13 @@
 
         function incrementCounter(event) {
             const currentTime = Date.now();
-            if (currentTime - lastClickTime < 1000) {
+            if (currentTime - lastClickTime < 200) {
                 return;
             }
             lastClickTime = currentTime;
 
             count++;
+            updateProgressBar();
             const text = document.createElement('div');
             text.innerText = '+1';
             text.style.position = 'absolute';
@@ -143,15 +186,15 @@
         }
 
         function showProfile() {
-            const profileInfo = document.getElementById('profile-info');
+            document.getElementById('profile-info').style.display = 'flex';
             const timeSpent = document.getElementById('time-spent');
             const appleCount = document.getElementById('apple-count');
             timeSpent.innerText = Math.floor((Date.now() - startTime) / 1000);
             appleCount.innerText = count;
-            profileInfo.style.display = 'flex';
-            setTimeout(() => {
-                profileInfo.style.display = 'none';
-            }, 5000);
+        }
+
+        function closeProfile() {
+            document.getElementById('profile-info').style.display = 'none';
         }
 
         function showCases() {
@@ -160,6 +203,26 @@
 
         function closeCases() {
             document.getElementById('cases-popup').style.display = 'none';
+        }
+
+        function updateProgressBar() {
+            const progress = document.getElementById('progress');
+            const progressText = document.getElementById('progress-text');
+            let width = 0;
+            if (count < 1000) {
+                width = (count / 1000) * 100;
+                progressText.innerText = 'Палки';
+            } else if (count < 5000) {
+                width = ((count - 1000) / 4000) * 100;
+                progressText.innerText = 'Сажанец';
+            } else if (count < 20000) {
+                width = ((count - 5000) / 15000) * 100;
+                progressText.innerText = 'Сажанец 2 ур.';
+            } else {
+                width = 100;
+                progressText.innerText = 'Сажанец 2 ур.';
+            }
+            progress.style.width = `${width}%`;
         }
     </script>
     <!-- Firebase App (the core Firebase SDK) -->
