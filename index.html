@@ -36,8 +36,9 @@
         }
         .profile-info {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 300px;
             padding: 20px;
             background: black;
@@ -120,9 +121,10 @@
             overflow: hidden;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             color: white;
             font-size: 14px;
+            padding: 0 10px;
         }
         .progress-bar .progress {
             height: 100%;
@@ -134,8 +136,8 @@
 </head>
 <body>
     <div class="progress-bar">
-        <span id="progress-text">Палки</span>
         <div class="progress" id="progress"></div>
+        <span id="progress-text">Палки</span>
     </div>
     <div class="apple" onclick="incrementCounter(event)" tabindex="0"></div>
     <div class="profile" onclick="showProfile()" tabindex="0"></div>
