@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>яблоко</title>
+    <title>Web3 App</title>
     <style>
         body {
             background: linear-gradient(to bottom, black, gray);
@@ -16,16 +16,16 @@
             font-family: Arial, sans-serif;
         }
         .apple {
-            width: 250px;
-            height: 250px;
+            width: 260px;
+            height: 260px;
             background: url('Apple.png') no-repeat center/cover;
-            border-radius: 65%;
+            border-radius: 50%;
             cursor: pointer;
             outline: none;
         }
         .profile {
             position: absolute;
-            bottom: 80px;
+            bottom: 125px;
             left: 20px;
             width: 50px;
             height: 50px;
@@ -134,6 +134,7 @@
             background: green;
             width: 0;
             transition: width 0.3s;
+            border-radius: 15px;
         }
     </style>
 </head>
@@ -162,6 +163,11 @@
         let count = 0;
         let startTime = Date.now();
         let lastClickTime = 0;
+        const dataFile = 'data.html';
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            loadUserData();
+        });
 
         function incrementCounter(event) {
             const currentTime = Date.now();
@@ -201,6 +207,7 @@
 
         function closeProfile() {
             document.getElementById('profile-info').style.display = 'none';
+            saveUserData();
         }
 
         function showCases() {
@@ -229,6 +236,41 @@
                 progressText.innerText = 'Сажанец 2 ур.';
             }
             progress.style.width = `${width}%`;
+        }
+
+        function saveUserData() {
+            const userData = {
+                count: count,
+                startTime: startTime
+            };
+            const userDataString = JSON.stringify(userData);
+            const blob = new Blob([userDataString], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = dataFile;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function loadUserData() {
+            fetch(dataFile)
+                .then(response => response.text())
+                .then(data => {
+                    if (data) {
+                        const userData = JSON.parse(data);
+                        count = userData.count;
+                        startTime = userData.startTime;
+                        updateProgressBar();
+                    } else {
+                        saveUserData();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading user data:', error);
+                    saveUserData();
+                });
         }
     </script>
 </body>
